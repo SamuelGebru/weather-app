@@ -26,6 +26,16 @@ app.post("/", function(req, res) {
     response.on("data", function(data) {
       const weatherData = JSON.parse(data)
       console.log(weatherData);
+
+      const temprature = weatherData.main.temp
+          const weatherDescrption = weatherData.weather[0].description
+          let weatherLocation = weatherData.name
+          let icon = weatherData.weather[0].icon
+          let imageURL = "https://openweathermap.org/img/wn/" + icon +"@2x.png"
+          res.write("<h1> The temprature in " + weatherLocation + " is " + temprature + " degrees Celcius.</h1>");
+          res.write("<p> The weather descripton is " + weatherDescrption + ". <p>");
+          res.write("<img src='"+ imageURL +"'>");
+          res.send();
     })
   })
 })
